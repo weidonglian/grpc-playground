@@ -36,11 +36,16 @@
 #include <string>
 
 #include <grpc++/grpc++.h>
+#include <thread>
+#include <sstream>
 
 #ifdef BAZEL_BUILD
 #include "examples/protos/helloworld.grpc.pb.h"
 #else
+
 #include "helloworld.grpc.pb.h"
+#include "cmake-build-debug/proto-src/helloworld.grpc.pb.h"
+
 #endif
 
 using grpc::Server;
@@ -51,16 +56,20 @@ using helloworld::HelloRequest;
 using helloworld::HelloReply;
 using helloworld::Greeter;
 
-int message_id = 0; // Is this thread-safe ? You can create multiple clients to access the same server.
+// Is this thread-safe? You can create multiple clients to access the same server.
+// Then the GreeterServiceImpl will be called in multiple pool threads. Thus we need
+// to protect the resources. We can use atomic variable or a mutex to protect them.
+int message_id = 0;
 
 // Logic and data behind the server's behavior.
 class GreeterServiceImpl final : public Greeter::Service {
-  Status SayHello(ServerContext* context, const HelloRequest* request,
-                  HelloReply* reply) override {
-    std::string prefix("Hello ");
-    reply->set_message(prefix + "-" + std::to_string(message_id++) + "- " + request->name());
-    return Status::OK;
-  }
+    Status SayHello(ServerContext *context, const HelloRequest *request, HelloReply *reply) override {
+      std::ostringstream oss;
+      oss << "ThreadId:" << std::this_thread::get_id() << " and message id:" << message_id++ << " Hello " << request->name();
+      reply->set_message(oss.str());
+      std::this_thread::sleep_for(std::chrono::seconds(4));
+      return Status::OK;
+    }
 };
 
 void RunServer() {
@@ -82,7 +91,7 @@ void RunServer() {
   server->Wait();
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   RunServer();
 
   return 0;
