@@ -21,7 +21,7 @@ make
 
 ## How to play
 
-### Simple greeter service
+### Simple greeter service - sync, blocking, non-streaming
 
 Start a terminal
 ```bash
