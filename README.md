@@ -37,10 +37,13 @@ Start again a new terminal
 ```bash
 ./greeter_client bar
 ```
-foo and bar stands for the client identifier name and the thread id inciates the running thread id in server for current SayHello call.
-Message id is the global unique id for all the clients. It should be made thread-safe in the real application, since they are accssed by
-mutiple threads at the same time. 
-Observer the thread id and message id and username. Each request may be run in any thread of the available pool managed
-by grpc itself, thus you have to protect your shared or global resources, e.g. message_id in greeter_server.cc. You can
-protect by atomic variable or a mutex depending on your actual use case. That says, you can make multiple requests by the
+
+- *foo* and *bar* stands for the client identifier name
+- The thread id inciates the running thread in server for current SayHello call.
+- Message id is the global unique id for all the clients. It should be made thread-safe in the real application, since they are accssed by mutiple threads at the same time. 
+
+Observer the thread id and message id and username. Each request may be run in any thread of the available thread pool managed
+by grpc itself, thus you have to protect your shared or global resources, e.g. message_id in greeter_server.cc. 
+
+You can protect by atomic variable or a mutex depending on your actual use case. That says, you can make multiple requests by the
 same channel, but you have to make sure the thread-safety yourself for access the shared resources.
