@@ -21,7 +21,7 @@ make
 
 ## How to play
 
-* Simple greeter service
+### Simple greeter service
 
 Start a terminal
 ```bash
