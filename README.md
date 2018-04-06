@@ -21,6 +21,12 @@ make
 
 ## How to play
 
+These greeter examples are copied from google offical examples folder. 
+I have done all kinds of adaptions in order to test and understand how
+it works. 
+
+The best way to learn grpc is to play around.    
+
 ### Simple greeter service - sync, blocking, non-streaming
 
 Start a terminal
