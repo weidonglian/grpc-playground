@@ -49,6 +49,7 @@ target_link_libraries(greeter_client
 # Building async server
 add_executable(greeter_async_server
     ${CMAKE_CURRENT_SOURCE_DIR}/greeter_async_server.cc
+    call_data.cpp call_data.hpp
     ${PROTO_SRCS}
     ${GRPC_SRCS}
 )
@@ -59,7 +60,7 @@ target_link_libraries(greeter_async_server
 
 # Building client
 add_executable(greeter_async_client
-    ${CMAKE_CURRENT_SOURCE_DIR}/greeter_async_client.cc
+        ${CMAKE_CURRENT_SOURCE_DIR}/greeter_async_client_simple.cc
     ${PROTO_SRCS}
     ${GRPC_SRCS}
 )
@@ -69,7 +70,7 @@ target_link_libraries(greeter_async_client
 )
 
 add_executable(greeter_async_client2
-    ${CMAKE_CURRENT_SOURCE_DIR}/greeter_async_client2.cc
+        ${CMAKE_CURRENT_SOURCE_DIR}/greeter_async_client.cc
     ${PROTO_SRCS}
     ${GRPC_SRCS}
 )

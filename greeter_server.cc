@@ -35,7 +35,7 @@
 #include <memory>
 #include <string>
 
-#include <grpc++/grpc++.h>
+#include <grpcpp/grpcpp.h>
 #include <thread>
 #include <sstream>
 
@@ -54,6 +54,10 @@ using grpc::ServerContext;
 using grpc::Status;
 using helloworld::HelloRequest;
 using helloworld::HelloReply;
+using helloworld::GoodByeRequest;
+using helloworld::GoodByeReply;
+using helloworld::CheekRequest;
+using helloworld::CheekReply;
 using helloworld::Greeter;
 
 // Is this thread-safe? You can create multiple clients to access the same server.
@@ -63,13 +67,32 @@ int message_id = 0;
 
 // Logic and data behind the server's behavior.
 class GreeterServiceImpl final : public Greeter::Service {
-    Status SayHello(ServerContext *context, const HelloRequest *request, HelloReply *reply) override {
-      std::ostringstream oss;
-      oss << "ThreadId:" << std::this_thread::get_id() << " and message id:" << message_id++ << " Hello " << request->name();
-      reply->set_message(oss.str());
-      std::this_thread::sleep_for(std::chrono::seconds(4));
-      return Status::OK;
-    }
+  Status SayHello(ServerContext *context, const HelloRequest *request, HelloReply *response) override {
+    std::ostringstream oss;
+    oss << "ThreadId:" << std::this_thread::get_id() << " and message id:" << message_id++ << " Hello "
+        << request->name();
+    response->set_message(oss.str());
+    std::this_thread::sleep_for(std::chrono::seconds(4));
+    return Status::OK;
+  }
+
+  Status SayGoodBye(ServerContext *context, const GoodByeRequest *request, GoodByeReply *response) override {
+    std::ostringstream oss;
+    oss << "ThreadId:" << std::this_thread::get_id() << " and message id:" << message_id++ << " GoodBye "
+        << request->name();
+    response->set_message(oss.str());
+    std::this_thread::sleep_for(std::chrono::seconds(4));
+    return Status::OK;
+  }
+
+  Status KissCheek(ServerContext *context, const CheekRequest *request, CheekReply *response) override {
+    std::ostringstream oss;
+    oss << "ThreadId:" << std::this_thread::get_id() << " and message id:" << message_id++ << " KissCheek "
+        << request->name();
+    response->set_message(oss.str());
+    std::this_thread::sleep_for(std::chrono::seconds(4));
+    return Status::OK;
+  }
 };
 
 void RunServer() {

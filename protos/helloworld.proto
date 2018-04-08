@@ -25,6 +25,8 @@ package helloworld;
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
+  rpc SayGoodBye(GoodByeRequest) returns (GoodByeReply) {}
+  rpc KissCheek(CheekRequest) returns (CheekReply) {}
 }
 
 // The request message containing the user's name.
@@ -34,5 +36,26 @@ message HelloRequest {
 
 // The response message containing the greetings
 message HelloReply {
+  string message = 1;
+}
+
+
+// The request message containing the user's name.
+message GoodByeRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message GoodByeReply {
+  string message = 1;
+}
+
+// The request message containing the user's name.
+message CheekRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message CheekReply {
   string message = 1;
 }
