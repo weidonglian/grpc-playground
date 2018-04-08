@@ -27,7 +27,7 @@ it works.
 
 The best way to learn grpc is to play around.    
 
-### Sync simple greeter service - sync, blocking, non-streaming
+### Sync greeter service - sync, blocking, non-streaming
 
 Start a terminal
 ```bash
