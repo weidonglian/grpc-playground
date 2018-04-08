@@ -43,7 +43,7 @@ struct AsyncCallSayHello {
     service->RequestSayHello(&ctx_, &request_, &responder_, cq, cq, tag);
   }
 
-  void Process() {
+  void operator()() {
     // The actual processing.
     std::string prefix("Hello ");
     reply_.set_message(prefix + request_.name());

@@ -31,7 +31,7 @@ class CallDataImpl : public CallData {
       status_ = FINISH;
       new CallDataImpl<TAsyncService, TAsyncCall>(service_, cq_);
       // Invoke the actual process function.
-      callImpl_.Process();
+      callImpl_();
     } else {
       GPR_ASSERT(status_ == FINISH);
       // Once in the FINISH state, deallocate ourselves (CallData).
