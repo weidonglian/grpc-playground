@@ -44,7 +44,6 @@
 #else
 
 #include "helloworld.grpc.pb.h"
-#include "cmake-build-debug/proto-src/helloworld.grpc.pb.h"
 
 #endif
 

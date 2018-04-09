@@ -23,6 +23,7 @@
 
 #include <grpcpp/grpcpp.h>
 #include <grpc/support/log.h>
+#include <sstream>
 
 #include "helloworld.grpc.pb.h"
 #include "call_data.hpp"
@@ -37,6 +38,11 @@ using helloworld::HelloRequest;
 using helloworld::HelloReply;
 using helloworld::Greeter;
 
+// Is this thread-safe? You can create multiple clients to access the same server.
+// Then the GreeterServiceImpl will be called in multiple pool threads. Thus we need
+// to protect the resources. We can use atomic variable or a mutex to protect them.
+int message_id = 0;
+
 struct AsyncCallSayHello {
   AsyncCallSayHello(Greeter::AsyncService *service, ServerCompletionQueue *cq, void* tag) :
       ctx_(), request_(), reply_(), tag_(tag), responder_(&ctx_) {
@@ -45,8 +51,11 @@ struct AsyncCallSayHello {
 
   void operator()() {
     // The actual processing.
-    std::string prefix("Hello ");
-    reply_.set_message(prefix + request_.name());
+    std::ostringstream oss;
+    oss << "ThreadId:" << std::this_thread::get_id() << " and message id:" << message_id++ << " Hello "
+        << request_.name();
+    reply_.set_message(oss.str());
+    std::this_thread::sleep_for(std::chrono::seconds(4));
     // And we are done! Let the gRPC runtime know we've finished, using the
     // memory address of this instance as the uniquely identifying tag for
     // the event.
