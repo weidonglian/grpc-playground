@@ -36,12 +36,14 @@ namespace protobuf_helloworld_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[6];
+  static const ::google::protobuf::internal::ParseTable schema[7];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
 void AddDescriptors();
+void InitDefaultsFileChunkImpl();
+void InitDefaultsFileChunk();
 void InitDefaultsHelloRequestImpl();
 void InitDefaultsHelloRequest();
 void InitDefaultsHelloReplyImpl();
@@ -55,6 +57,7 @@ void InitDefaultsCheekRequest();
 void InitDefaultsCheekReplyImpl();
 void InitDefaultsCheekReply();
 inline void InitDefaults() {
+  InitDefaultsFileChunk();
   InitDefaultsHelloRequest();
   InitDefaultsHelloReply();
   InitDefaultsGoodByeRequest();
@@ -70,6 +73,9 @@ extern CheekReplyDefaultTypeInternal _CheekReply_default_instance_;
 class CheekRequest;
 class CheekRequestDefaultTypeInternal;
 extern CheekRequestDefaultTypeInternal _CheekRequest_default_instance_;
+class FileChunk;
+class FileChunkDefaultTypeInternal;
+extern FileChunkDefaultTypeInternal _FileChunk_default_instance_;
 class GoodByeReply;
 class GoodByeReplyDefaultTypeInternal;
 extern GoodByeReplyDefaultTypeInternal _GoodByeReply_default_instance_;
@@ -86,6 +92,113 @@ extern HelloRequestDefaultTypeInternal _HelloRequest_default_instance_;
 namespace helloworld {
 
 // ===================================================================
+
+class FileChunk : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:helloworld.FileChunk) */ {
+ public:
+  FileChunk();
+  virtual ~FileChunk();
+
+  FileChunk(const FileChunk& from);
+
+  inline FileChunk& operator=(const FileChunk& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  FileChunk(FileChunk&& from) noexcept
+    : FileChunk() {
+    *this = ::std::move(from);
+  }
+
+  inline FileChunk& operator=(FileChunk&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const FileChunk& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const FileChunk* internal_default_instance() {
+    return reinterpret_cast<const FileChunk*>(
+               &_FileChunk_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    0;
+
+  void Swap(FileChunk* other);
+  friend void swap(FileChunk& a, FileChunk& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline FileChunk* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  FileChunk* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const FileChunk& from);
+  void MergeFrom(const FileChunk& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(FileChunk* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // bytes chunk = 1;
+  void clear_chunk();
+  static const int kChunkFieldNumber = 1;
+  const ::std::string& chunk() const;
+  void set_chunk(const ::std::string& value);
+  #if LANG_CXX11
+  void set_chunk(::std::string&& value);
+  #endif
+  void set_chunk(const char* value);
+  void set_chunk(const void* value, size_t size);
+  ::std::string* mutable_chunk();
+  ::std::string* release_chunk();
+  void set_allocated_chunk(::std::string* chunk);
+
+  // @@protoc_insertion_point(class_scope:helloworld.FileChunk)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr chunk_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_helloworld_2eproto::TableStruct;
+  friend void ::protobuf_helloworld_2eproto::InitDefaultsFileChunkImpl();
+};
+// -------------------------------------------------------------------
 
 class HelloRequest : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:helloworld.HelloRequest) */ {
  public:
@@ -122,7 +235,7 @@ class HelloRequest : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_HelloRequest_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+    1;
 
   void Swap(HelloRequest* other);
   friend void swap(HelloRequest& a, HelloRequest& b) {
@@ -229,7 +342,7 @@ class HelloReply : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_HelloReply_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    1;
+    2;
 
   void Swap(HelloReply* other);
   friend void swap(HelloReply& a, HelloReply& b) {
@@ -336,7 +449,7 @@ class GoodByeRequest : public ::google::protobuf::Message /* @@protoc_insertion_
                &_GoodByeRequest_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    2;
+    3;
 
   void Swap(GoodByeRequest* other);
   friend void swap(GoodByeRequest& a, GoodByeRequest& b) {
@@ -443,7 +556,7 @@ class GoodByeReply : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_GoodByeReply_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    3;
+    4;
 
   void Swap(GoodByeReply* other);
   friend void swap(GoodByeReply& a, GoodByeReply& b) {
@@ -550,7 +663,7 @@ class CheekRequest : public ::google::protobuf::Message /* @@protoc_insertion_po
                &_CheekRequest_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    4;
+    5;
 
   void Swap(CheekRequest* other);
   friend void swap(CheekRequest& a, CheekRequest& b) {
@@ -657,7 +770,7 @@ class CheekReply : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_CheekReply_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    5;
+    6;
 
   void Swap(CheekReply* other);
   friend void swap(CheekReply& a, CheekReply& b) {
@@ -736,6 +849,63 @@ class CheekReply : public ::google::protobuf::Message /* @@protoc_insertion_poin
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// FileChunk
+
+// bytes chunk = 1;
+inline void FileChunk::clear_chunk() {
+  chunk_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& FileChunk::chunk() const {
+  // @@protoc_insertion_point(field_get:helloworld.FileChunk.chunk)
+  return chunk_.GetNoArena();
+}
+inline void FileChunk::set_chunk(const ::std::string& value) {
+  
+  chunk_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:helloworld.FileChunk.chunk)
+}
+#if LANG_CXX11
+inline void FileChunk::set_chunk(::std::string&& value) {
+  
+  chunk_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:helloworld.FileChunk.chunk)
+}
+#endif
+inline void FileChunk::set_chunk(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  chunk_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:helloworld.FileChunk.chunk)
+}
+inline void FileChunk::set_chunk(const void* value, size_t size) {
+  
+  chunk_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:helloworld.FileChunk.chunk)
+}
+inline ::std::string* FileChunk::mutable_chunk() {
+  
+  // @@protoc_insertion_point(field_mutable:helloworld.FileChunk.chunk)
+  return chunk_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* FileChunk::release_chunk() {
+  // @@protoc_insertion_point(field_release:helloworld.FileChunk.chunk)
+  
+  return chunk_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void FileChunk::set_allocated_chunk(::std::string* chunk) {
+  if (chunk != NULL) {
+    
+  } else {
+    
+  }
+  chunk_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), chunk);
+  // @@protoc_insertion_point(field_set_allocated:helloworld.FileChunk.chunk)
+}
+
+// -------------------------------------------------------------------
+
 // HelloRequest
 
 // string name = 1;
@@ -1079,6 +1249,8 @@ inline void CheekReply::set_allocated_message(::std::string* message) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

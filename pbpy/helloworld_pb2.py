@@ -19,10 +19,41 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='helloworld.proto',
   package='helloworld',
   syntax='proto3',
-  serialized_pb=_b('\n\x10helloworld.proto\x12\nhelloworld\"\x1c\n\x0cHelloRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1d\n\nHelloReply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1e\n\x0eGoodByeRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1f\n\x0cGoodByeReply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1c\n\x0c\x43heekRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1d\n\nCheekReply\x12\x0f\n\x07message\x18\x01 \x01(\t2\xd0\x01\n\x07Greeter\x12>\n\x08SayHello\x12\x18.helloworld.HelloRequest\x1a\x16.helloworld.HelloReply\"\x00\x12\x44\n\nSayGoodBye\x12\x1a.helloworld.GoodByeRequest\x1a\x18.helloworld.GoodByeReply\"\x00\x12?\n\tKissCheek\x12\x18.helloworld.CheekRequest\x1a\x16.helloworld.CheekReply\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3')
+  serialized_pb=_b('\n\x10helloworld.proto\x12\nhelloworld\"\x1a\n\tFileChunk\x12\r\n\x05\x63hunk\x18\x01 \x01(\x0c\"\x1c\n\x0cHelloRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1d\n\nHelloReply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1e\n\x0eGoodByeRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1f\n\x0cGoodByeReply\x12\x0f\n\x07message\x18\x01 \x01(\t\"\x1c\n\x0c\x43heekRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1d\n\nCheekReply\x12\x0f\n\x07message\x18\x01 \x01(\t2\x93\x02\n\x07Greeter\x12>\n\x08SayHello\x12\x18.helloworld.HelloRequest\x1a\x16.helloworld.HelloReply\"\x00\x12\x44\n\nSayGoodBye\x12\x1a.helloworld.GoodByeRequest\x1a\x18.helloworld.GoodByeReply\"\x00\x12?\n\tKissCheek\x12\x18.helloworld.CheekRequest\x1a\x16.helloworld.CheekReply\"\x00\x12\x41\n\x0b\x43onvertFile\x12\x15.helloworld.FileChunk\x1a\x15.helloworld.FileChunk\"\x00(\x01\x30\x01\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3')
 )
 
 
+
+
+_FILECHUNK = _descriptor.Descriptor(
+  name='FileChunk',
+  full_name='helloworld.FileChunk',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='chunk', full_name='helloworld.FileChunk.chunk', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=32,
+  serialized_end=58,
+)
 
 
 _HELLOREQUEST = _descriptor.Descriptor(
@@ -51,8 +82,8 @@ _HELLOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=32,
-  serialized_end=60,
+  serialized_start=60,
+  serialized_end=88,
 )
 
 
@@ -82,8 +113,8 @@ _HELLOREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=62,
-  serialized_end=91,
+  serialized_start=90,
+  serialized_end=119,
 )
 
 
@@ -113,8 +144,8 @@ _GOODBYEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=93,
-  serialized_end=123,
+  serialized_start=121,
+  serialized_end=151,
 )
 
 
@@ -144,8 +175,8 @@ _GOODBYEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=125,
-  serialized_end=156,
+  serialized_start=153,
+  serialized_end=184,
 )
 
 
@@ -175,8 +206,8 @@ _CHEEKREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=158,
-  serialized_end=186,
+  serialized_start=186,
+  serialized_end=214,
 )
 
 
@@ -206,10 +237,11 @@ _CHEEKREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=188,
-  serialized_end=217,
+  serialized_start=216,
+  serialized_end=245,
 )
 
+DESCRIPTOR.message_types_by_name['FileChunk'] = _FILECHUNK
 DESCRIPTOR.message_types_by_name['HelloRequest'] = _HELLOREQUEST
 DESCRIPTOR.message_types_by_name['HelloReply'] = _HELLOREPLY
 DESCRIPTOR.message_types_by_name['GoodByeRequest'] = _GOODBYEREQUEST
@@ -217,6 +249,13 @@ DESCRIPTOR.message_types_by_name['GoodByeReply'] = _GOODBYEREPLY
 DESCRIPTOR.message_types_by_name['CheekRequest'] = _CHEEKREQUEST
 DESCRIPTOR.message_types_by_name['CheekReply'] = _CHEEKREPLY
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+FileChunk = _reflection.GeneratedProtocolMessageType('FileChunk', (_message.Message,), dict(
+  DESCRIPTOR = _FILECHUNK,
+  __module__ = 'helloworld_pb2'
+  # @@protoc_insertion_point(class_scope:helloworld.FileChunk)
+  ))
+_sym_db.RegisterMessage(FileChunk)
 
 HelloRequest = _reflection.GeneratedProtocolMessageType('HelloRequest', (_message.Message,), dict(
   DESCRIPTOR = _HELLOREQUEST,
@@ -270,8 +309,8 @@ _GREETER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=220,
-  serialized_end=428,
+  serialized_start=248,
+  serialized_end=523,
   methods=[
   _descriptor.MethodDescriptor(
     name='SayHello',
@@ -298,6 +337,15 @@ _GREETER = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_CHEEKREQUEST,
     output_type=_CHEEKREPLY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ConvertFile',
+    full_name='helloworld.Greeter.ConvertFile',
+    index=3,
+    containing_service=None,
+    input_type=_FILECHUNK,
+    output_type=_FILECHUNK,
     options=None,
   ),
 ])

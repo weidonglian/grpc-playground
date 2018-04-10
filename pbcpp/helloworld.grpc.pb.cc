@@ -19,6 +19,7 @@ static const char* Greeter_method_names[] = {
   "/helloworld.Greeter/SayHello",
   "/helloworld.Greeter/SayGoodBye",
   "/helloworld.Greeter/KissCheek",
+  "/helloworld.Greeter/ConvertFile",
 };
 
 std::unique_ptr< Greeter::Stub> Greeter::NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options) {
@@ -31,6 +32,7 @@ Greeter::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
   : channel_(channel), rpcmethod_SayHello_(Greeter_method_names[0], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_SayGoodBye_(Greeter_method_names[1], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_KissCheek_(Greeter_method_names[2], ::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_ConvertFile_(Greeter_method_names[3], ::grpc::internal::RpcMethod::BIDI_STREAMING, channel)
   {}
 
 ::grpc::Status Greeter::Stub::SayHello(::grpc::ClientContext* context, const ::helloworld::HelloRequest& request, ::helloworld::HelloReply* response) {
@@ -69,6 +71,18 @@ Greeter::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel)
   return ::grpc::internal::ClientAsyncResponseReaderFactory< ::helloworld::CheekReply>::Create(channel_.get(), cq, rpcmethod_KissCheek_, context, request, false);
 }
 
+::grpc::ClientReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* Greeter::Stub::ConvertFileRaw(::grpc::ClientContext* context) {
+  return ::grpc::internal::ClientReaderWriterFactory< ::helloworld::FileChunk, ::helloworld::FileChunk>::Create(channel_.get(), rpcmethod_ConvertFile_, context);
+}
+
+::grpc::ClientAsyncReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* Greeter::Stub::AsyncConvertFileRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::helloworld::FileChunk, ::helloworld::FileChunk>::Create(channel_.get(), cq, rpcmethod_ConvertFile_, context, true, tag);
+}
+
+::grpc::ClientAsyncReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* Greeter::Stub::PrepareAsyncConvertFileRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncReaderWriterFactory< ::helloworld::FileChunk, ::helloworld::FileChunk>::Create(channel_.get(), cq, rpcmethod_ConvertFile_, context, false, nullptr);
+}
+
 Greeter::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Greeter_method_names[0],
@@ -85,6 +99,11 @@ Greeter::Service::Service() {
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Greeter::Service, ::helloworld::CheekRequest, ::helloworld::CheekReply>(
           std::mem_fn(&Greeter::Service::KissCheek), this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Greeter_method_names[3],
+      ::grpc::internal::RpcMethod::BIDI_STREAMING,
+      new ::grpc::internal::BidiStreamingHandler< Greeter::Service, ::helloworld::FileChunk, ::helloworld::FileChunk>(
+          std::mem_fn(&Greeter::Service::ConvertFile), this)));
 }
 
 Greeter::Service::~Service() {
@@ -108,6 +127,12 @@ Greeter::Service::~Service() {
   (void) context;
   (void) request;
   (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Greeter::Service::ConvertFile(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* stream) {
+  (void) context;
+  (void) stream;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 

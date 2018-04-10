@@ -29,6 +29,11 @@ class GreeterStub(object):
         request_serializer=helloworld__pb2.CheekRequest.SerializeToString,
         response_deserializer=helloworld__pb2.CheekReply.FromString,
         )
+    self.ConvertFile = channel.stream_stream(
+        '/helloworld.Greeter/ConvertFile',
+        request_serializer=helloworld__pb2.FileChunk.SerializeToString,
+        response_deserializer=helloworld__pb2.FileChunk.FromString,
+        )
 
 
 class GreeterServicer(object):
@@ -56,6 +61,13 @@ class GreeterServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def ConvertFile(self, request_iterator, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_GreeterServicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -73,6 +85,11 @@ def add_GreeterServicer_to_server(servicer, server):
           servicer.KissCheek,
           request_deserializer=helloworld__pb2.CheekRequest.FromString,
           response_serializer=helloworld__pb2.CheekReply.SerializeToString,
+      ),
+      'ConvertFile': grpc.stream_stream_rpc_method_handler(
+          servicer.ConvertFile,
+          request_deserializer=helloworld__pb2.FileChunk.FromString,
+          response_serializer=helloworld__pb2.FileChunk.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(

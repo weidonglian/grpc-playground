@@ -71,6 +71,15 @@ class Greeter final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::helloworld::CheekReply>> PrepareAsyncKissCheek(::grpc::ClientContext* context, const ::helloworld::CheekRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::helloworld::CheekReply>>(PrepareAsyncKissCheekRaw(context, request, cq));
     }
+    std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::helloworld::FileChunk, ::helloworld::FileChunk>> ConvertFile(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriterInterface< ::helloworld::FileChunk, ::helloworld::FileChunk>>(ConvertFileRaw(context));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::helloworld::FileChunk, ::helloworld::FileChunk>> AsyncConvertFile(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::helloworld::FileChunk, ::helloworld::FileChunk>>(AsyncConvertFileRaw(context, cq, tag));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::helloworld::FileChunk, ::helloworld::FileChunk>> PrepareAsyncConvertFile(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriterInterface< ::helloworld::FileChunk, ::helloworld::FileChunk>>(PrepareAsyncConvertFileRaw(context, cq));
+    }
   private:
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::helloworld::HelloReply>* AsyncSayHelloRaw(::grpc::ClientContext* context, const ::helloworld::HelloRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::helloworld::HelloReply>* PrepareAsyncSayHelloRaw(::grpc::ClientContext* context, const ::helloworld::HelloRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -78,6 +87,9 @@ class Greeter final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::helloworld::GoodByeReply>* PrepareAsyncSayGoodByeRaw(::grpc::ClientContext* context, const ::helloworld::GoodByeRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::helloworld::CheekReply>* AsyncKissCheekRaw(::grpc::ClientContext* context, const ::helloworld::CheekRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::helloworld::CheekReply>* PrepareAsyncKissCheekRaw(::grpc::ClientContext* context, const ::helloworld::CheekRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientReaderWriterInterface< ::helloworld::FileChunk, ::helloworld::FileChunk>* ConvertFileRaw(::grpc::ClientContext* context) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::helloworld::FileChunk, ::helloworld::FileChunk>* AsyncConvertFileRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) = 0;
+    virtual ::grpc::ClientAsyncReaderWriterInterface< ::helloworld::FileChunk, ::helloworld::FileChunk>* PrepareAsyncConvertFileRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
@@ -103,6 +115,15 @@ class Greeter final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::helloworld::CheekReply>> PrepareAsyncKissCheek(::grpc::ClientContext* context, const ::helloworld::CheekRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::helloworld::CheekReply>>(PrepareAsyncKissCheekRaw(context, request, cq));
     }
+    std::unique_ptr< ::grpc::ClientReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>> ConvertFile(::grpc::ClientContext* context) {
+      return std::unique_ptr< ::grpc::ClientReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>>(ConvertFileRaw(context));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>> AsyncConvertFile(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>>(AsyncConvertFileRaw(context, cq, tag));
+    }
+    std::unique_ptr<  ::grpc::ClientAsyncReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>> PrepareAsyncConvertFile(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>>(PrepareAsyncConvertFileRaw(context, cq));
+    }
 
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
@@ -112,9 +133,13 @@ class Greeter final {
     ::grpc::ClientAsyncResponseReader< ::helloworld::GoodByeReply>* PrepareAsyncSayGoodByeRaw(::grpc::ClientContext* context, const ::helloworld::GoodByeRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::helloworld::CheekReply>* AsyncKissCheekRaw(::grpc::ClientContext* context, const ::helloworld::CheekRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::helloworld::CheekReply>* PrepareAsyncKissCheekRaw(::grpc::ClientContext* context, const ::helloworld::CheekRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* ConvertFileRaw(::grpc::ClientContext* context) override;
+    ::grpc::ClientAsyncReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* AsyncConvertFileRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq, void* tag) override;
+    ::grpc::ClientAsyncReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* PrepareAsyncConvertFileRaw(::grpc::ClientContext* context, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_SayHello_;
     const ::grpc::internal::RpcMethod rpcmethod_SayGoodBye_;
     const ::grpc::internal::RpcMethod rpcmethod_KissCheek_;
+    const ::grpc::internal::RpcMethod rpcmethod_ConvertFile_;
   };
   static std::unique_ptr<Stub> NewStub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
 
@@ -126,6 +151,7 @@ class Greeter final {
     virtual ::grpc::Status SayHello(::grpc::ServerContext* context, const ::helloworld::HelloRequest* request, ::helloworld::HelloReply* response);
     virtual ::grpc::Status SayGoodBye(::grpc::ServerContext* context, const ::helloworld::GoodByeRequest* request, ::helloworld::GoodByeReply* response);
     virtual ::grpc::Status KissCheek(::grpc::ServerContext* context, const ::helloworld::CheekRequest* request, ::helloworld::CheekReply* response);
+    virtual ::grpc::Status ConvertFile(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* stream);
   };
   template <class BaseClass>
   class WithAsyncMethod_SayHello : public BaseClass {
@@ -187,7 +213,27 @@ class Greeter final {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_SayHello<WithAsyncMethod_SayGoodBye<WithAsyncMethod_KissCheek<Service > > > AsyncService;
+  template <class BaseClass>
+  class WithAsyncMethod_ConvertFile : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithAsyncMethod_ConvertFile() {
+      ::grpc::Service::MarkMethodAsync(3);
+    }
+    ~WithAsyncMethod_ConvertFile() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status ConvertFile(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* stream) final override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestConvertFile(::grpc::ServerContext* context, ::grpc::ServerAsyncReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* stream, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncBidiStreaming(3, context, stream, new_call_cq, notification_cq, tag);
+    }
+  };
+  typedef WithAsyncMethod_SayHello<WithAsyncMethod_SayGoodBye<WithAsyncMethod_KissCheek<WithAsyncMethod_ConvertFile<Service > > > > AsyncService;
   template <class BaseClass>
   class WithGenericMethod_SayHello : public BaseClass {
    private:
@@ -235,6 +281,23 @@ class Greeter final {
     }
     // disable synchronous version of this method
     ::grpc::Status KissCheek(::grpc::ServerContext* context, const ::helloworld::CheekRequest* request, ::helloworld::CheekReply* response) final override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_ConvertFile : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service *service) {}
+   public:
+    WithGenericMethod_ConvertFile() {
+      ::grpc::Service::MarkMethodGeneric(3);
+    }
+    ~WithGenericMethod_ConvertFile() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status ConvertFile(::grpc::ServerContext* context, ::grpc::ServerReaderWriter< ::helloworld::FileChunk, ::helloworld::FileChunk>* stream) final override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }

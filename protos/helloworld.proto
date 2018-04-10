@@ -27,6 +27,11 @@ service Greeter {
   rpc SayHello (HelloRequest) returns (HelloReply) {}
   rpc SayGoodBye(GoodByeRequest) returns (GoodByeReply) {}
   rpc KissCheek(CheekRequest) returns (CheekReply) {}
+  rpc ConvertFile(stream FileChunk) returns (stream FileChunk) {}
+}
+
+message FileChunk {
+  bytes chunk = 1;
 }
 
 // The request message containing the user's name.

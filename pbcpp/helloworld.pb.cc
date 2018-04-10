@@ -20,6 +20,11 @@
 #endif
 // @@protoc_insertion_point(includes)
 namespace helloworld {
+class FileChunkDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<FileChunk>
+      _instance;
+} _FileChunk_default_instance_;
 class HelloRequestDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<HelloRequest>
@@ -52,6 +57,27 @@ class CheekReplyDefaultTypeInternal {
 } _CheekReply_default_instance_;
 }  // namespace helloworld
 namespace protobuf_helloworld_2eproto {
+void InitDefaultsFileChunkImpl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
+#else
+  ::google::protobuf::internal::InitProtobufDefaults();
+#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  {
+    void* ptr = &::helloworld::_FileChunk_default_instance_;
+    new (ptr) ::helloworld::FileChunk();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::helloworld::FileChunk::InitAsDefaultInstance();
+}
+
+void InitDefaultsFileChunk() {
+  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
+  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsFileChunkImpl);
+}
+
 void InitDefaultsHelloRequestImpl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -178,9 +204,15 @@ void InitDefaultsCheekReply() {
   ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsCheekReplyImpl);
 }
 
-::google::protobuf::Metadata file_level_metadata[6];
+::google::protobuf::Metadata file_level_metadata[7];
 
 const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::helloworld::FileChunk, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::helloworld::FileChunk, chunk_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::helloworld::HelloRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -219,15 +251,17 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::helloworld::CheekReply, message_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::helloworld::HelloRequest)},
-  { 6, -1, sizeof(::helloworld::HelloReply)},
-  { 12, -1, sizeof(::helloworld::GoodByeRequest)},
-  { 18, -1, sizeof(::helloworld::GoodByeReply)},
-  { 24, -1, sizeof(::helloworld::CheekRequest)},
-  { 30, -1, sizeof(::helloworld::CheekReply)},
+  { 0, -1, sizeof(::helloworld::FileChunk)},
+  { 6, -1, sizeof(::helloworld::HelloRequest)},
+  { 12, -1, sizeof(::helloworld::HelloReply)},
+  { 18, -1, sizeof(::helloworld::GoodByeRequest)},
+  { 24, -1, sizeof(::helloworld::GoodByeReply)},
+  { 30, -1, sizeof(::helloworld::CheekRequest)},
+  { 36, -1, sizeof(::helloworld::CheekReply)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::google::protobuf::Message*>(&::helloworld::_FileChunk_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::helloworld::_HelloRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::helloworld::_HelloReply_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::helloworld::_GoodByeRequest_default_instance_),
@@ -252,28 +286,30 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 6);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 7);
 }
 
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\020helloworld.proto\022\nhelloworld\"\034\n\014HelloR"
-      "equest\022\014\n\004name\030\001 \001(\t\"\035\n\nHelloReply\022\017\n\007me"
-      "ssage\030\001 \001(\t\"\036\n\016GoodByeRequest\022\014\n\004name\030\001 "
-      "\001(\t\"\037\n\014GoodByeReply\022\017\n\007message\030\001 \001(\t\"\034\n\014"
-      "CheekRequest\022\014\n\004name\030\001 \001(\t\"\035\n\nCheekReply"
-      "\022\017\n\007message\030\001 \001(\t2\320\001\n\007Greeter\022>\n\010SayHell"
-      "o\022\030.helloworld.HelloRequest\032\026.helloworld"
-      ".HelloReply\"\000\022D\n\nSayGoodBye\022\032.helloworld"
-      ".GoodByeRequest\032\030.helloworld.GoodByeRepl"
-      "y\"\000\022\?\n\tKissCheek\022\030.helloworld.CheekReque"
-      "st\032\026.helloworld.CheekReply\"\000B6\n\033io.grpc."
-      "examples.helloworldB\017HelloWorldProtoP\001\242\002"
-      "\003HLWb\006proto3"
+      "\n\020helloworld.proto\022\nhelloworld\"\032\n\tFileCh"
+      "unk\022\r\n\005chunk\030\001 \001(\014\"\034\n\014HelloRequest\022\014\n\004na"
+      "me\030\001 \001(\t\"\035\n\nHelloReply\022\017\n\007message\030\001 \001(\t\""
+      "\036\n\016GoodByeRequest\022\014\n\004name\030\001 \001(\t\"\037\n\014GoodB"
+      "yeReply\022\017\n\007message\030\001 \001(\t\"\034\n\014CheekRequest"
+      "\022\014\n\004name\030\001 \001(\t\"\035\n\nCheekReply\022\017\n\007message\030"
+      "\001 \001(\t2\223\002\n\007Greeter\022>\n\010SayHello\022\030.hellowor"
+      "ld.HelloRequest\032\026.helloworld.HelloReply\""
+      "\000\022D\n\nSayGoodBye\022\032.helloworld.GoodByeRequ"
+      "est\032\030.helloworld.GoodByeReply\"\000\022\?\n\tKissC"
+      "heek\022\030.helloworld.CheekRequest\032\026.hellowo"
+      "rld.CheekReply\"\000\022A\n\013ConvertFile\022\025.hellow"
+      "orld.FileChunk\032\025.helloworld.FileChunk\"\000("
+      "\0010\001B6\n\033io.grpc.examples.helloworldB\017Hell"
+      "oWorldProtoP\001\242\002\003HLWb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 492);
+      descriptor, 587);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "helloworld.proto", &protobuf_RegisterTypes);
 }
@@ -290,6 +326,250 @@ struct StaticDescriptorInitializer {
 } static_descriptor_initializer;
 }  // namespace protobuf_helloworld_2eproto
 namespace helloworld {
+
+// ===================================================================
+
+void FileChunk::InitAsDefaultInstance() {
+}
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int FileChunk::kChunkFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+FileChunk::FileChunk()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    ::protobuf_helloworld_2eproto::InitDefaultsFileChunk();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:helloworld.FileChunk)
+}
+FileChunk::FileChunk(const FileChunk& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  chunk_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.chunk().size() > 0) {
+    chunk_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.chunk_);
+  }
+  // @@protoc_insertion_point(copy_constructor:helloworld.FileChunk)
+}
+
+void FileChunk::SharedCtor() {
+  chunk_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _cached_size_ = 0;
+}
+
+FileChunk::~FileChunk() {
+  // @@protoc_insertion_point(destructor:helloworld.FileChunk)
+  SharedDtor();
+}
+
+void FileChunk::SharedDtor() {
+  chunk_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void FileChunk::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* FileChunk::descriptor() {
+  ::protobuf_helloworld_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_helloworld_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const FileChunk& FileChunk::default_instance() {
+  ::protobuf_helloworld_2eproto::InitDefaultsFileChunk();
+  return *internal_default_instance();
+}
+
+FileChunk* FileChunk::New(::google::protobuf::Arena* arena) const {
+  FileChunk* n = new FileChunk;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void FileChunk::Clear() {
+// @@protoc_insertion_point(message_clear_start:helloworld.FileChunk)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  chunk_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+bool FileChunk::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:helloworld.FileChunk)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // bytes chunk = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_chunk()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:helloworld.FileChunk)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:helloworld.FileChunk)
+  return false;
+#undef DO_
+}
+
+void FileChunk::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:helloworld.FileChunk)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bytes chunk = 1;
+  if (this->chunk().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      1, this->chunk(), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:helloworld.FileChunk)
+}
+
+::google::protobuf::uint8* FileChunk::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:helloworld.FileChunk)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bytes chunk = 1;
+  if (this->chunk().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->chunk(), target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:helloworld.FileChunk)
+  return target;
+}
+
+size_t FileChunk::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:helloworld.FileChunk)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // bytes chunk = 1;
+  if (this->chunk().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->chunk());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void FileChunk::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:helloworld.FileChunk)
+  GOOGLE_DCHECK_NE(&from, this);
+  const FileChunk* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const FileChunk>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:helloworld.FileChunk)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:helloworld.FileChunk)
+    MergeFrom(*source);
+  }
+}
+
+void FileChunk::MergeFrom(const FileChunk& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:helloworld.FileChunk)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.chunk().size() > 0) {
+
+    chunk_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.chunk_);
+  }
+}
+
+void FileChunk::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:helloworld.FileChunk)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void FileChunk::CopyFrom(const FileChunk& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:helloworld.FileChunk)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool FileChunk::IsInitialized() const {
+  return true;
+}
+
+void FileChunk::Swap(FileChunk* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void FileChunk::InternalSwap(FileChunk* other) {
+  using std::swap;
+  chunk_.Swap(&other->chunk_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata FileChunk::GetMetadata() const {
+  protobuf_helloworld_2eproto::protobuf_AssignDescriptorsOnce();
+  return ::protobuf_helloworld_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
 
 // ===================================================================
 
