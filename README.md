@@ -82,9 +82,107 @@ to send data to client, e.g. push notifications to client.
 
 ### Inheritance or Polymorphism Support in Proto3
 
-This is a common issue that you want to stream or send different messages into a list.
+ProtoBuf does not support inheritance. The following will list all the possible alternatives.
+I do not like the `extention` solutions. I did not list them here. You can check 
+[here](http://www.indelible.org/ink/protobuf-polymorphism/) for more details.
+  
+It is not so easy to stream or send different messages in grpc. In protos, we can use
  
 - oneof 
 - any
 
+##### Oneof
+
+We can `stream` or `repeat` Command.  
+ 
+```
+syntax = "proto3";
+
+message CommandDataA {
+    string a = 1;
+}
+
+message CommandDataB {
+    string b = 1;
+}
+
+message Command {
+  CommandType type = 1;
+  CommandName name = 2;
+  oneof data {
+    CommandDataA a = 3;
+    CommandDataB b = 4;
+  }
+}
+```
+
+##### Any
+
+```
+message Command {
+  CommandType type = 1; // Enum of the actual command type.
+  Any data; // The actual binary buffer of the command
+}
+
+message CommandDataA {
+  int32 a;
+  ...
+}
+
+message CommandDataB{
+  string b;
+  ... 
+}
+```
+
+We can then pack and unpack different `CommandDataX` into `Command.data`. We can peek the type when receive the `Command`, 
+then determine which `CommandData` is used to unpack the `Any data` field.
+
+##### Composition
+
+If we just want a hierarchy not sending them by a list or by a single method, then we can use composition as below.
+
+```
+message Header {
+  string type = 1;
+  string id = 2;
+}
+
+message Message1 {
+  Header header = 1;
+  ...
+}
+
+message Message2 {
+  Header header = 1;
+  ...
+}
+```   
+
 ### Streaming File   
+
+For the small file, probably we can easily handle by define a `Any file;` field, but for the large files, it is 
+preferred to use streaming. We will check the availability of `info` field to start handling a new file and cache it 
+somewhere in disk or database identified with the `uuid`. Then we can reference it by uuid in other grpc methods.
+
+```
+service BlobTransfer {
+    rpc PutBlob (stream PutBlobRequest) returns (PutBlobResponse);
+}
+
+message PutBlobRequest {
+    message BlobInfo {
+         string uuid = 1; // unique identifier to identify the file.
+         int64 size = 2; // the blob size in bytes.
+    }
+    message BlobChunk {
+          bytes data = 1;
+          int64 offset = 2;
+    }
+    
+    oneof value {
+        BlobInfo info = 1;
+        BlobChunk chunk = 2;
+    }
+}
+```
