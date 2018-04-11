@@ -82,13 +82,13 @@ to send data to client, e.g. push notifications to client.
 
 ### Inheritance or Polymorphism Support in Proto3
 
-ProtoBuf does not support inheritance. The following will list all the possible alternatives.
-I do not like the `extention` solutions. I did not list them here. You can check 
-[here](http://www.indelible.org/ink/protobuf-polymorphism/) for more details.
+ProtoBuf does not support inheritance. The following lists all the possible alternatives.
+I do not like the `extention` solutions due to the portability and cutie syntax. You can check 
+[extension](http://www.indelible.org/ink/protobuf-polymorphism/) for more details.
   
 It is not so easy to stream or send different messages in grpc. In protos, we can use
  
-- oneof 
+- oneof
 - any
 
 ##### Oneof
